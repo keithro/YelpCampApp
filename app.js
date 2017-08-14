@@ -18,11 +18,10 @@ var commentRoutes = require("./routes/comments"),
 
 mongoose.Promise = global.Promise;
 
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12";
 // first set environment variable by running (in dir in terminal):
 // export DATABASEURL=mongodb://localhost/yelp_camp_v12
-mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://keith:Vo6l^bWaCh@dbh84.mlab.com:27847/yelpcamp");
-
+mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");

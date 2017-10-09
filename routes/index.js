@@ -16,6 +16,9 @@ router.get("/register", function(req, res) {
 // handle sign up logic
 router.post("/register", function(req, res) {
     var newUser = new User({username: req.body.username});
+    if( req.body.adminCode === 'topsecret321code') {
+        newUser.isAdmin = true; //in iN app use if === her email (which will be user)
+    }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             return res.render("register", {"error": err.message});

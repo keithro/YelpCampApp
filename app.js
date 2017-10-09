@@ -16,8 +16,10 @@ var commentRoutes = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
 
+// Fix for deprecated Mongoose library
 mongoose.Promise = global.Promise;
 
+// connect to database depending on which (development or deployment) environment or a fallback (localhost which shoulr be the dev loc env)
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12";
 // first set environment variable by running (in dir in terminal):
 // export DATABASEURL=mongodb://localhost/yelp_camp_v12
@@ -56,6 +58,8 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 // SERVER CONFIG
+// if working in local dev environment you could set a var to check for available port and pas it it as argument:
+// const port = process.env.PORT || 3000;  ** add above after requirements **
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The YelpCamp Server Has Started!");
 });
